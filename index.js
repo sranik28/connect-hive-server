@@ -41,6 +41,28 @@ async function run() {
       res.send(result);
     });
 
+    app.patch("/allContact/:id", async (req, res) => {
+      const id = req.params.id;
+
+      const data = req.body;
+      const result = await all_Contacts.updateOne(
+        { _id: new ObjectId(id) },
+        {
+          $set: {
+            name: data.name,
+            email: data.email,
+            phone: data.phone,
+            address: data.address,
+            photoURL: data.photoURL,
+          },
+        },
+        {
+          upsert: true,
+        }
+      );
+      res.send(result);
+    });
+
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log(
