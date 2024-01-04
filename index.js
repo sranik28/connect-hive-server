@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
-const { MongoClient, ServerApiVersion } = require("mongodb");
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 
 const port = process.env.PORT || 8888;
 const app = express();
@@ -24,13 +24,20 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
+    client.connect();
 
     const all_Contacts = client.db("ConnectHive").collection("allContact");
 
     app.get("/allContact", async (req, res) => {
       const toys = all_Contacts.find();
       const result = await toys.toArray();
+      res.send(result);
+    });
+
+    app.get("/allContact/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await all_Contacts.findOne(query);
       res.send(result);
     });
 
