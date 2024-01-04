@@ -71,6 +71,13 @@ async function run() {
       res.send(result);
     });
 
+    app.post("/contacts", async (req, res) => {
+      const data = req.body;
+      const result = await all_Contacts.insertOne(data);
+      res.send(result);
+      console.log(result);
+    });
+
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log(
