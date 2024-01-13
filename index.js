@@ -41,8 +41,6 @@ async function run() {
       res.send(result);
     });
 
-
-    
     app.patch("/allContact/:id", async (req, res) => {
       const id = req.params.id;
 
