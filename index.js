@@ -28,6 +28,9 @@ async function run() {
 
     const all_Contacts = client.db("ConnectHive").collection("allContact");
 
+
+
+    
     app.get("/allContact", async (req, res) => {
       const toys = all_Contacts.find();
       const result = await toys.toArray();
