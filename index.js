@@ -27,7 +27,7 @@ async function run() {
     client.connect();
 
     const all_Contacts = client.db("ConnectHive").collection("allContact");
-   
+
     app.get("/allContact", async (req, res) => {
       const toys = all_Contacts.find();
       const result = await toys.toArray();
@@ -89,11 +89,8 @@ async function run() {
   }
 }
 run().catch(console.dir);
-
-
 app.get("/", (req, res) => {
   res.send("contact is coltase");
 });
-
 
 app.listen(port);
